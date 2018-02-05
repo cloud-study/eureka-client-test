@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.cloud.datasourcetest.mapper.TestMapper">
+
+    <select id="getDefaultDate" resultType="java.util.Map">
+        SELECT
+            category_id,
+            category_name,
+            parent_id
+        FROM
+            category
+    </select>
+
+    <select id="getCustomData" resultType="java.util.Map">
+        SELECT
+            USER_ID,
+            USER_NAME,
+            EMAIL,
+            PHONE,
+            `STATUS`
+        FROM
+            sys_user;
+    </select>
+</mapper>

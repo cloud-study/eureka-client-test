@@ -1,0 +1,48 @@
+#指定微服务的名称后续在调用的时候只需要使用该名称就可以进行服务的访问
+spring:
+  application:
+    name: eureka-client
+  # 配置文件
+  cloud:
+    config:
+      name: eureka-client
+      discovery:
+        service-id: config-server
+        enabled: true
+    stream:
+      bindings:
+        springCloudBusInput:
+          group: eureka-client
+          consumer:
+            autoBindDlq: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/secondhand?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&maxReconnects=5&useSSL=false
+    username: root
+    password: admin
+    driver-class-name: com.mysql.jdbc.Driver
+server:
+  port: 9990
+
+eureka:
+  client:
+    serviceUrl:
+      #指定服务注册中心的位置
+      defaultZone: ${REGISTER_SERVER_URL:http://localhost:8761/eureka/}
+  instance:
+    prefer-ip-address: true
+    hostname: eureka-client
+
+# spring boot 1.5.X 以上默认开通了安全认证    配置refresh接口
+#management:
+#  security:
+#    enabled: false
+
+custom:
+  datasource:
+    names: sub
+    sub:
+      url: jdbc:mysql://localhost:3306/hreport_dev?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&maxReconnects=5&useSSL=false
+      username: root
+      password: admin
+      driver-class-name: com.mysql.jdbc.Driver
+
