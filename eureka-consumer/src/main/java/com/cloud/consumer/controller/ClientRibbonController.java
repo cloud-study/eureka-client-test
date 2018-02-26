@@ -1,5 +1,7 @@
 package com.cloud.consumer.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.http.ResponseEntity;
@@ -15,10 +17,12 @@ import org.springframework.web.client.RestTemplate;
  */
 @RestController
 @RequestMapping(value = "/api/eureka-consumer")
+@Api(value = "服务调用-ribbon", description = "服务调用-ribbon")
 public class ClientRibbonController {
 //    @Autowired
     private RestTemplate restTemplate;
 
+    @ApiOperation(value = "eureka-client：helloWord接口", httpMethod = "GET", response = ResponseEntity.class)
     @GetMapping("/getHelloWordByRibbon")
     public ResponseEntity getHelloWordByRibbon() {
         String url = "http://eureka-client/helloWord";

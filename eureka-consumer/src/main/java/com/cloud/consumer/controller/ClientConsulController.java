@@ -1,5 +1,7 @@
 package com.cloud.consumer.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
@@ -16,12 +18,14 @@ import org.springframework.web.client.RestTemplate;
  */
 @RestController
 @RequestMapping(value = "/api/eureka-consumer")
+@Api(value = "服务调用-loadBalancer", description = "服务调用-loadBalancer")
 public class ClientConsulController {
     @Autowired
     private LoadBalancerClient loadBalancerClient;
 //    @Autowired
     private RestTemplate restTemplate;
 
+    @ApiOperation(value = "eureka-client：info接口", httpMethod = "GET", response = ResponseEntity.class)
     @GetMapping("/getClientInfo")
     public ResponseEntity getClientInfo() {
         ServiceInstance serviceInstance = loadBalancerClient.choose("eureka-client");
@@ -30,6 +34,7 @@ public class ClientConsulController {
         return ResponseEntity.ok(restTemplate.getForObject(url, String.class));
     }
 
+    @ApiOperation(value = "eureka-client：helloWord接口", httpMethod = "GET", response = ResponseEntity.class)
     @GetMapping("/getClientHelloWord")
     public ResponseEntity getClientHelloWord() {
         ServiceInstance serviceInstance = loadBalancerClient.choose("eureka-client");

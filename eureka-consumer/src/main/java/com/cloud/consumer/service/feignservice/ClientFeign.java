@@ -3,6 +3,8 @@ package com.cloud.consumer.service.feignservice;
 import com.cloud.consumer.service.feignservice.impl.ClientFeignFallback;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /**
  * @author weisen.yang@hand-china.com
@@ -11,9 +13,9 @@ import org.springframework.web.bind.annotation.GetMapping;
  */
 @FeignClient(name = "eureka-client", fallback = ClientFeignFallback.class)
 public interface ClientFeign {
-    @GetMapping("/helloWord")
+    @RequestMapping(value = "/api/eureka-client/helloWord", method = RequestMethod.GET)
     String getHelloWord();
 
-    @GetMapping("/getHelloWordError")
+    @RequestMapping("/api/eureka-client/getHelloWordError")
     String getHelloWordError();
 }
