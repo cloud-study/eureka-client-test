@@ -1,12 +1,15 @@
 package com.cloud.test.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -35,7 +38,12 @@ public class TestController {
     }
 
     @ApiOperation(value = "读取配置参数", httpMethod = "GET", response = ResponseEntity.class)
-    @RequestMapping(value = "/helloWord")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "Authorization", value = "Authorization token",
+                    required = true, dataType = "string", paramType = "header")
+    })
+    @RequestMapping(value = "/sec/helloWord")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity helloWord(){
         String str = helloWordStr;
         return ResponseEntity.ok(str);

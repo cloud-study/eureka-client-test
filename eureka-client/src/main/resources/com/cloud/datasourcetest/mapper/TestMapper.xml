@@ -13,12 +13,12 @@
 
     <select id="getCustomData" resultType="java.util.Map">
         SELECT
-            USER_ID,
-            USER_NAME,
-            EMAIL,
-            PHONE,
-            `STATUS`
+            id,
+            `name`,
+            descr,
+            pid,
+            `level`
         FROM
-            sys_user;
+            categroy
     </select>
 </mapper>

@@ -16,7 +16,7 @@ spring:
           consumer:
             autoBindDlq: true
   datasource:
-    url: jdbc:mysql://localhost:3306/secondhand?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&maxReconnects=5&useSSL=false
+    url: jdbc:mysql://localhost:3306/springsecurity?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&maxReconnects=5&useSSL=false
     username: root
     password: admin
     driver-class-name: com.mysql.jdbc.Driver
@@ -36,13 +36,20 @@ eureka:
 #management:
 #  security:
 #    enabled: false
+security:
+  basic:
+    enabled: false
+
 
 custom:
   datasource:
     names: sub
     sub:
-      url: jdbc:mysql://localhost:3306/hreport_dev?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&maxReconnects=5&useSSL=false
+      url: jdbc:mysql://localhost:3306/shopping?characterEncoding=UTF-8&autoReconnect=true&failOverReadOnly=false&maxReconnects=5&useSSL=false
       username: root
       password: admin
       driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath*:com/cloud/**/*.xml
 
